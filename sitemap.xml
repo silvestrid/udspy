@@ -9,11 +9,11 @@
          <lastmod>2025-10-25</lastmod>
     </url>
     <url>
-         <loc>https://silvestrid.github.io/udspy/api/history/</loc>
+         <loc>https://silvestrid.github.io/udspy/api/confirmation/</loc>
          <lastmod>2025-10-25</lastmod>
     </url>
     <url>
-         <loc>https://silvestrid.github.io/udspy/api/interrupt/</loc>
+         <loc>https://silvestrid.github.io/udspy/api/history/</loc>
          <lastmod>2025-10-25</lastmod>
     </url>
     <url>
@@ -42,6 +42,10 @@
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/adapters/</loc>
+         <lastmod>2025-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://silvestrid.github.io/udspy/architecture/confirmation/</loc>
          <lastmod>2025-10-25</lastmod>
     </url>
     <url>
@@ -90,6 +94,10 @@
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/chain_of_thought/</loc>
+         <lastmod>2025-10-25</lastmod>
+    </url>
+    <url>
+         <loc>https://silvestrid.github.io/udspy/examples/confirmation/</loc>
          <lastmod>2025-10-25</lastmod>
     </url>
     <url>

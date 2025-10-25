@@ -816,13 +816,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adr-004-human-in-the-loop-with-interruptible-decorator" class="md-nav__link">
+  <a href="#adr-004-human-in-the-loop-with-confirmation-system" class="md-nav__link">
     <span class="md-ellipsis">
-      ADR-004: Human-in-the-Loop with Interruptible Decorator
+      ADR-004: Human-in-the-Loop with Confirmation System
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="ADR-004: Human-in-the-Loop with Interruptible Decorator">
+    <nav class="md-nav" aria-label="ADR-004: Human-in-the-Loop with Confirmation System">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1463,6 +1463,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1643,6 +1666,29 @@
   
   <span class="md-ellipsis">
     ReAct
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
     
   </span>
   
@@ -1902,6 +1948,29 @@
   
   <span class="md-ellipsis">
     Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
     
   </span>
   
@@ -2290,13 +2359,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adr-004-human-in-the-loop-with-interruptible-decorator" class="md-nav__link">
+  <a href="#adr-004-human-in-the-loop-with-confirmation-system" class="md-nav__link">
     <span class="md-ellipsis">
-      ADR-004: Human-in-the-Loop with Interruptible Decorator
+      ADR-004: Human-in-the-Loop with Confirmation System
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="ADR-004: Human-in-the-Loop with Interruptible Decorator">
+    <nav class="md-nav" aria-label="ADR-004: Human-in-the-Loop with Confirmation System">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2714,7 +2783,7 @@
 <li><a href="#adr-001-initial-project-setup">Initial Project Setup (2025-01-24)</a></li>
 <li><a href="#adr-002-context-manager-for-settings">Context Manager for Settings (2025-01-24)</a></li>
 <li><a href="#adr-003-chain-of-thought-module">Chain of Thought Module (2025-01-24)</a></li>
-<li><a href="#adr-004-human-in-the-loop-with-interruptible-decorator">Human-in-the-Loop with Interruptible Decorator (2025-01-25)</a></li>
+<li><a href="#adr-004-human-in-the-loop-with-confirmation-system">Human-in-the-Loop with Confirmation System (2025-01-25)</a></li>
 <li><a href="#adr-005-react-agent-module">ReAct Agent Module (2025-01-25)</a></li>
 <li><a href="#adr-006-unified-module-execution-pattern-aexecute">Unified Module Execution Pattern (aexecute) (2025-01-25)</a></li>
 </ol>
@@ -3015,39 +3084,39 @@
 <h3 id="migration-guide_1">Migration Guide</h3>
 <p>Feature is additive - no migration needed.</p>
 <hr />
-<h2 id="adr-004-human-in-the-loop-with-interruptible-decorator">ADR-004: Human-in-the-Loop with Interruptible Decorator</h2>
+<h2 id="adr-004-human-in-the-loop-with-confirmation-system">ADR-004: Human-in-the-Loop with Confirmation System</h2>
 <p><strong>Date</strong>: 2025-01-25</p>
 <p><strong>Status</strong>: Accepted</p>
 <h3 id="context_3">Context</h3>
 <p>Many agent applications require human approval for certain actions (e.g., deleting files, sending emails, making purchases). We needed a clean way to suspend execution, ask for user input, and resume where we left off.</p>
 <h3 id="decision_3">Decision</h3>
-<p>Implement an <code>@interruptible</code> decorator that:
+<p>Implement an <code>@confirm_first</code> decorator that:
 - Suspends function execution before it runs
-- Raises <code>HumanInTheLoopRequired</code> exception with context
+- Raises <code>ConfirmationRequired</code> exception with context
 - Allows resumption with user approval/rejection/modifications
 - Uses thread-safe <code>contextvars</code> for state management
-- Generates stable interrupt IDs based on function + arguments</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">interruptible</span><span class="p">,</span> <span class="n">HumanInTheLoopRequired</span><span class="p">,</span> <span class="n">set_interrupt_approval</span>
+- Generates stable confirmation IDs based on function + arguments</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">confirm_first</span><span class="p">,</span> <span class="n">ConfirmationRequired</span><span class="p">,</span> <span class="n">respond_to_confirmation</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nd">@interruptible</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nd">@confirm_first</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">delete_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deleted </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">delete_file</span><span class="p">(</span><span class="s2">&quot;/important.txt&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="c1"># User approves</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="n">set_interrupt_approval</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">interrupt_id</span><span class="p">,</span> <span class="n">approved</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="n">respond_to_confirmation</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">confirmation_id</span><span class="p">,</span> <span class="n">approved</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="n">delete_file</span><span class="p">(</span><span class="s2">&quot;/important.txt&quot;</span><span class="p">)</span>  <span class="c1"># Now executes</span>
 </code></pre></div>
 <h3 id="implementation-details_1">Implementation Details</h3>
 <ol>
-<li><strong>Stable Interrupt IDs</strong>: Generated from <code>function_name:hash(args)</code> to allow same call to resume</li>
+<li><strong>Stable Confirmation IDs</strong>: Generated from <code>function_name:hash(args)</code> to allow same call to resume</li>
 <li><strong>Context Variables</strong>: Thread-safe and async-safe state storage</li>
-<li><strong>Rejection Support</strong>: <code>InterruptRejected</code> exception distinguishes "user said no" from "pending"</li>
+<li><strong>Rejection Support</strong>: <code>ConfirmationRejected</code> exception distinguishes "user said no" from "pending"</li>
 <li><strong>Argument Modification</strong>: Users can edit arguments before approval</li>
-<li><strong>Automatic Cleanup</strong>: Interrupts are cleared after successful execution</li>
+<li>**Automatic Cleanup: Confirmations are cleared after successful execution</li>
 </ol>
 <h3 id="key-features_2">Key Features</h3>
 <ol>
@@ -3069,10 +3138,10 @@
 - Clean separation of business logic from approval logic
 - Works naturally with ReAct agent workflows
 - Thread-safe and async-safe out of the box
-- Easy to test (deterministic based on interrupt state)</p>
+- Easy to test (deterministic based on confirmation state)</p>
 <p><strong>Trade-offs</strong>:
 - Requires exception handling (but this is explicit and clear)
-- Interrupt state needs to be managed (cleared on success)
+- Confirmation state needs to be managed (cleared on success)
 - Not suitable for purely synchronous, single-threaded apps (but works fine there too)</p>
 <h3 id="alternatives-considered_3">Alternatives Considered</h3>
 <ul>
@@ -3115,7 +3184,7 @@
 <li><strong>Dynamic Signature</strong>: Extends signature with reasoning_N, tool_name_N, tool_args_N fields</li>
 <li><strong>Tool Execution</strong>: Automatically executes tools and adds results to context</li>
 <li><strong>Error Handling</strong>: Retries with error feedback if tool execution fails</li>
-<li><strong>Human Interrupts</strong>: Integrates with <code>@interruptible</code> for user input</li>
+<li><strong>Human Confirmations</strong>: Integrates with <code>@confirm_first</code> for user input</li>
 </ol>
 <h3 id="key-features_3">Key Features</h3>
 <ol>
@@ -3165,7 +3234,7 @@
 </tr>
 <tr>
 <td>Human-in-Loop</td>
-<td>Built-in with <code>@interruptible</code></td>
+<td>Built-in with <code>@confirm_first</code></td>
 <td>External handling</td>
 </tr>
 <tr>

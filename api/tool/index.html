@@ -16,7 +16,7 @@
         <link rel="prev" href="../react/">
       
       
-        <link rel="next" href="../settings/">
+        <link rel="next" href="../confirmation/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -695,6 +695,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -875,6 +898,29 @@
   
   <span class="md-ellipsis">
     ReAct
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
     
   </span>
   
@@ -1200,9 +1246,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tool-interruption-example" class="md-nav__link">
+  <a href="#tool-confirmation-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Tool Interruption Example
+      Tool Confirmation Example
     </span>
   </a>
   
@@ -1270,9 +1316,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#interruptible" class="md-nav__link">
+  <a href="#require_confirmation" class="md-nav__link">
     <span class="md-ellipsis">
-      interruptible
+      require_confirmation
     </span>
   </a>
   
@@ -1376,9 +1422,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool-interruption" class="md-nav__link">
+  <a href="#tool-confirmation" class="md-nav__link">
     <span class="md-ellipsis">
-      Tool Interruption
+      Tool Confirmation
     </span>
   </a>
   
@@ -1442,6 +1488,29 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1523,9 +1592,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tool-interruption-example" class="md-nav__link">
+  <a href="#tool-confirmation-example" class="md-nav__link">
     <span class="md-ellipsis">
-      Tool Interruption Example
+      Tool Confirmation Example
     </span>
   </a>
   
@@ -1593,9 +1662,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#interruptible" class="md-nav__link">
+  <a href="#require_confirmation" class="md-nav__link">
     <span class="md-ellipsis">
-      interruptible
+      require_confirmation
     </span>
   </a>
   
@@ -1699,9 +1768,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool-interruption" class="md-nav__link">
+  <a href="#tool-confirmation" class="md-nav__link">
     <span class="md-ellipsis">
-      Tool Interruption
+      Tool Confirmation
     </span>
   </a>
   
@@ -1788,7 +1857,7 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">*</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">require_confirmation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Callable</span><span class="p">],</span> <span class="n">Tool</span><span class="p">]</span>
 </code></pre></div>
 <p>Decorator to mark a function as a tool for use with <code>Predict</code> and <code>ReAct</code> modules.</p>
@@ -1799,9 +1868,9 @@
 <li><strong><code>description</code></strong> (<code>str | None</code>, default: <code>None</code>): Tool description visible to the LLM</li>
 <li>If not provided, uses the function's docstring</li>
 <li>This helps the LLM decide when to use the tool</li>
-<li><strong><code>interruptible</code></strong> (<code>bool</code>, default: <code>False</code>): Whether to require user confirmation before execution</li>
-<li>If <code>True</code>, wraps the tool with <code>@interruptible</code> decorator</li>
-<li>Raises <code>HumanInTheLoopRequired</code> on first call, executes after approval</li>
+<li><strong><code>require_confirmation</code></strong> (<code>bool</code>, default: <code>False</code>): Whether to require user confirmation before execution</li>
+<li>If <code>True</code>, wraps the tool with <code>@confirm_first</code> decorator</li>
+<li>Raises <code>ConfirmationRequired</code> on first call, executes after approval</li>
 <li>Useful for destructive or sensitive operations</li>
 </ul>
 <p><strong>Returns:</strong></p>
@@ -1827,7 +1896,7 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="p">}</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="k">return</span> <span class="n">ops</span><span class="p">[</span><span class="n">operation</span><span class="p">]</span>
 </code></pre></div>
-<h3 id="tool-interruption-example">Tool Interruption Example</h3>
+<h3 id="tool-confirmation-example">Tool Confirmation Example</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
@@ -1835,7 +1904,7 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nd">@tool</span><span class="p">(</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;delete_file&quot;</span><span class="p">,</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete a file from the filesystem&quot;</span><span class="p">,</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">interruptible</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Requires user confirmation</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="n">require_confirmation</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Requires user confirmation</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">)</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">delete_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;File path to delete&quot;</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete a file (requires confirmation).&quot;&quot;&quot;</span>
@@ -1855,7 +1924,7 @@
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="o">*</span><span class="p">,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">require_confirmation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">desc</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">args</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="p">)</span>
@@ -1865,7 +1934,7 @@
 <li><strong><code>func</code></strong> (<code>Callable</code>): The function to wrap</li>
 <li><strong><code>name</code></strong> (<code>str | None</code>): Tool name (defaults to function name)</li>
 <li><strong><code>description</code></strong> (<code>str | None</code>): Tool description (defaults to docstring)</li>
-<li><strong><code>interruptible</code></strong> (<code>bool</code>, default: <code>False</code>): Whether to require confirmation before execution</li>
+<li><strong><code>require_confirmation</code></strong> (<code>bool</code>, default: <code>False</code>): Whether to require confirmation before execution</li>
 <li><strong><code>desc</code></strong> (<code>str | None</code>): Alias for <code>description</code> (DSPy compatibility)</li>
 <li><strong><code>args</code></strong> (<code>dict[str, str] | None</code>): Manual argument specification (DSPy compatibility)</li>
 </ul>
@@ -1897,8 +1966,8 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
 <p>The tool's description as seen by the LLM.</p>
-<h4 id="interruptible"><code>interruptible</code></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span>
+<h4 id="require_confirmation"><code>require_confirmation</code></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">require_confirmation</span><span class="p">:</span> <span class="nb">bool</span>
 </code></pre></div>
 <p>Whether this tool requires user confirmation before execution.</p>
 <h4 id="parameters"><code>parameters</code></h4>
@@ -1953,8 +2022,8 @@
 <p>Call the wrapped function asynchronously.</p>
 <ul>
 <li>If the function is async, awaits it directly</li>
-<li>If the function is sync, runs it in an executor to avoid blocking (unless <code>interruptible=True</code>)</li>
-<li>If <code>interruptible=True</code>, may raise <code>HumanInTheLoopRequired</code> before execution</li>
+<li>If the function is sync, runs it in an executor to avoid blocking (unless <code>require_confirmation=True</code>)</li>
+<li>If <code>require_confirmation=True</code>, may raise <code>ConfirmationRequired</code> before execution</li>
 </ul>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1966,7 +2035,7 @@
 </ul>
 <p><strong>Raises:</strong></p>
 <ul>
-<li><code>HumanInTheLoopRequired</code>: If <code>interruptible=True</code> and not yet approved</li>
+<li><code>ConfirmationRequired</code>: If <code>require_confirmation=True</code> and not yet approved</li>
 </ul>
 <p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
@@ -2111,16 +2180,16 @@
 <li>Descriptions help the LLM understand when and how to use the tool</li>
 </ul>
 <hr />
-<h2 id="tool-interruption">Tool Interruption</h2>
-<p>For destructive or sensitive operations, use <code>interruptible=True</code>:</p>
+<h2 id="tool-confirmation">Tool Confirmation</h2>
+<p>For destructive or sensitive operations, use <code>require_confirmation=True</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span><span class="p">,</span> <span class="n">HumanInTheLoopRequired</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span><span class="p">,</span> <span class="n">ConfirmationRequired</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="nd">@tool</span><span class="p">(</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;delete_all_files&quot;</span><span class="p">,</span>
 <a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete all files in a directory&quot;</span><span class="p">,</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="n">interruptible</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Requires confirmation</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="n">require_confirmation</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Requires confirmation</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="p">)</span>
 <a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">delete_all_files</span><span class="p">(</span>
 <a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory path&quot;</span><span class="p">)</span>
@@ -2130,13 +2199,13 @@
 <a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a>        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">file</span><span class="p">))</span>
 <a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deleted all files in </span><span class="si">{</span><span class="n">directory</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a>
-<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="c1"># When ReAct tries to call this tool, it raises HumanInTheLoopRequired on first call</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="c1"># When ReAct tries to call this tool, it raises ConfirmationRequired on first call</span>
 <a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="c1"># After user approves, the tool executes normally</span>
 </code></pre></div>
 <p><strong>How it works:</strong></p>
 <ol>
 <li>LLM decides to call the tool</li>
-<li>Tool function (wrapped with <code>@interruptible</code>) raises <code>HumanInTheLoopRequired</code> on first call</li>
+<li>Tool function (wrapped with <code>@confirm_first</code>) raises <code>ConfirmationRequired</code> on first call</li>
 <li>User sees confirmation prompt: <code>"Confirm execution of delete_all_files with args: {...}? (yes/no)"</code></li>
 <li>User responds with <code>"yes"</code>, <code>"no"</code>, or modified arguments</li>
 <li>ReAct resumes execution based on user's response</li>
@@ -2220,8 +2289,8 @@
 </code></pre></div></p>
 </li>
 <li>
-<p><strong>Require confirmation for destructive ops</strong>: Use <code>interruptible=True</code>
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nd">@tool</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;delete&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete data&quot;</span><span class="p">,</span> <span class="n">interruptible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p><strong>Require confirmation for destructive ops</strong>: Use <code>require_confirmation=True</code>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nd">@tool</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;delete&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete data&quot;</span><span class="p">,</span> <span class="n">require_confirmation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -2255,7 +2324,7 @@
 <a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>    <span class="o">*</span><span class="p">,</span>
-<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>    <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>    <span class="n">require_confirmation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]],</span> <span class="n">Tool</span><span class="p">]:</span> <span class="o">...</span>
 <a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>
 <a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a><span class="c1"># Tool class</span>
@@ -2263,7 +2332,7 @@
 <a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>    <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
 <a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 <a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>    <span class="n">interruptible</span><span class="p">:</span> <span class="nb">bool</span>
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>    <span class="n">require_confirmation</span><span class="p">:</span> <span class="nb">bool</span>
 <a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
 <a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>    <span class="n">desc</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># Alias for description</span>
 <a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>    <span class="n">args</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>  <span class="c1"># DSPy compatibility</span>
@@ -2275,7 +2344,7 @@
 <hr />
 <h2 id="see-also">See Also</h2>
 <ul>
-<li><a href="../interrupt/">Interrupt API</a> - Interrupt system and <code>@interruptible</code> decorator</li>
+<li><a href="../confirmation/">Confirmation API</a> - Confirmation system and <code>@confirm_first</code> decorator</li>
 <li><a href="../react/">ReAct API</a> - Using tools with ReAct agents</li>
 <li><a href="../../examples/react/">ReAct Examples</a> - Tool usage examples</li>
 <li><a href="../module/">Module API</a> - Base module documentation</li>

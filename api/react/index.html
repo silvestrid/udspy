@@ -695,6 +695,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -875,6 +898,29 @@
   
   <span class="md-ellipsis">
     ReAct
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
     
   </span>
   
@@ -1294,13 +1340,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#humaninthelooprequired" class="md-nav__link">
+  <a href="#confirmationrequired" class="md-nav__link">
     <span class="md-ellipsis">
-      HumanInTheLoopRequired
+      ConfirmationRequired
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="HumanInTheLoopRequired">
+    <nav class="md-nav" aria-label="ConfirmationRequired">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1332,9 +1378,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#interrupt_id" class="md-nav__link">
+  <a href="#confirmation_id" class="md-nav__link">
     <span class="md-ellipsis">
-      interrupt_id
+      confirmation_id
     </span>
   </a>
   
@@ -1425,9 +1471,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool-interruption" class="md-nav__link">
+  <a href="#tool-confirmation" class="md-nav__link">
     <span class="md-ellipsis">
-      Tool Interruption
+      Tool Confirmation
     </span>
   </a>
   
@@ -1506,6 +1552,29 @@
   
   <span class="md-ellipsis">
     Tools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../confirmation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Confirmation
     
   </span>
   
@@ -1709,13 +1778,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#humaninthelooprequired" class="md-nav__link">
+  <a href="#confirmationrequired" class="md-nav__link">
     <span class="md-ellipsis">
-      HumanInTheLoopRequired
+      ConfirmationRequired
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="HumanInTheLoopRequired">
+    <nav class="md-nav" aria-label="ConfirmationRequired">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1747,9 +1816,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#interrupt_id" class="md-nav__link">
+  <a href="#confirmation_id" class="md-nav__link">
     <span class="md-ellipsis">
-      interrupt_id
+      confirmation_id
     </span>
   </a>
   
@@ -1840,9 +1909,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool-interruption" class="md-nav__link">
+  <a href="#tool-confirmation" class="md-nav__link">
     <span class="md-ellipsis">
-      Tool Interruption
+      Tool Confirmation
     </span>
   </a>
   
@@ -1979,7 +2048,7 @@
 </ul>
 <p><strong>Raises:</strong></p>
 <ul>
-<li><code>HumanInTheLoopRequired</code>: When user input is needed</li>
+<li><code>ConfirmationRequired</code>: When user input is needed</li>
 <li>Raised when <code>ask_to_user</code> is called</li>
 <li>Raised when tool requires confirmation</li>
 <li>Contains saved state for resumption</li>
@@ -2021,21 +2090,21 @@
 <li><code>"no"</code> or <code>"n"</code>: Reject and let agent decide next action</li>
 <li>Free text: Treated as feedback for the agent</li>
 <li>JSON with <code>"edit"</code> key: Modify tool name/args (e.g., <code>{"edit": {"name": "new_tool", "args": {...}}}</code>)</li>
-<li><strong><code>saved_state</code></strong> (<code>HumanInTheLoopRequired</code>): The exception that was raised</li>
+<li><strong><code>saved_state</code></strong> (<code>ConfirmationRequired</code>): The exception that was raised</li>
 <li>Contains <code>context</code> dict with: <code>trajectory</code>, <code>iteration</code>, <code>input_args</code></li>
 <li>Contains <code>tool_call</code> with pending tool information</li>
-<li>Contains <code>interrupt_id</code> for tracking</li>
+<li>Contains <code>confirmation_id</code> for tracking</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <ul>
 <li><code>Prediction</code>: Final result after resuming execution</li>
 </ul>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanInTheLoopRequired</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfirmationRequired</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;Delete my files&quot;</span><span class="p">)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Agent asks: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">question</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">tool_call</span><span class="p">:</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">tool_call</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2056,7 +2125,7 @@
 <p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="o">.</span><span class="n">aforward</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;Delete my files&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Agent asks: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">question</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">get_user_input</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">question</span><span class="p">)</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">agent</span><span class="o">.</span><span class="n">aresume</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
@@ -2085,23 +2154,23 @@
 </code></pre></div>
 <p>Internal signature for extracting the final answer from the trajectory.</p>
 <hr />
-<h3 id="humaninthelooprequired"><code>HumanInTheLoopRequired</code></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">HumanInTheLoopRequired</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<h3 id="confirmationrequired"><code>ConfirmationRequired</code></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ConfirmationRequired</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when human input is needed to proceed.&quot;&quot;&quot;</span>
 </code></pre></div>
-<p><strong>Note</strong>: This exception has been moved to the <code>interrupt</code> module. See the <a href="../interrupt/">Interrupt API</a> for full documentation.</p>
+<p><strong>Note</strong>: This exception has been moved to the <code>confirmation</code> module. See the <a href="../confirmation/">Confirmation API</a> for full documentation.</p>
 <p>Exception that pauses ReAct execution and saves state for resumption. This exception can be raised by:
 - The <code>ask_to_user</code> tool when the agent needs clarification
-- Tools with <code>interruptible=True</code> before execution
+- Tools with <code>require_confirmation=True</code> before execution
 - Custom tools that need human input</p>
 <h4 id="constructor_1">Constructor</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy.interrupt</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanInTheLoopRequired</span><span class="p">,</span> <span class="n">ToolCall</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy.confirmation</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfirmationRequired</span><span class="p">,</span> <span class="n">ToolCall</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="bp">self</span><span class="p">,</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="n">question</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="o">*</span><span class="p">,</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="n">interrupt_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="n">confirmation_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="n">tool_call</span><span class="p">:</span> <span class="n">ToolCall</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="n">context</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">)</span>
@@ -2109,7 +2178,7 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><strong><code>question</code></strong> (<code>str</code>): Question to ask the user</li>
-<li><strong><code>interrupt_id</code></strong> (<code>str | None</code>): Unique interrupt ID (auto-generated if not provided)</li>
+<li><strong><code>confirmation_id</code></strong> (<code>str | None</code>): Unique confirmation ID (auto-generated if not provided)</li>
 <li><strong><code>tool_call</code></strong> (<code>ToolCall | None</code>): Optional tool call information</li>
 <li>Has attributes: <code>.name</code> (tool name), <code>.args</code> (arguments dict), <code>.call_id</code> (optional ID)</li>
 <li><strong><code>context</code></strong> (<code>dict[str, Any] | None</code>): Module-specific state dictionary</li>
@@ -2123,27 +2192,27 @@
 <p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;Delete files&quot;</span><span class="p">)</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">question</span><span class="p">)</span>  <span class="c1"># &quot;Confirm execution of delete_file...?&quot;</span>
 </code></pre></div>
-<h5 id="interrupt_id"><code>interrupt_id</code></h5>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">interrupt_id</span><span class="p">:</span> <span class="nb">str</span>
+<h5 id="confirmation_id"><code>confirmation_id</code></h5>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">confirmation_id</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div>
-<p>Unique identifier for this interrupt. Used with <code>get_interrupt_status()</code> to check approval status.</p>
+<p>Unique identifier for this confirmation. Used with <code>get_confirmation_status()</code> to check approval status.</p>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_interrupt_status</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_confirmation_status</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;Delete files&quot;</span><span class="p">)</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">interrupt_id</span><span class="p">)</span>  <span class="c1"># &quot;abc-123-def-456&quot;</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="n">status</span> <span class="o">=</span> <span class="n">get_interrupt_status</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">interrupt_id</span><span class="p">)</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">confirmation_id</span><span class="p">)</span>  <span class="c1"># &quot;abc-123-def-456&quot;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="n">status</span> <span class="o">=</span> <span class="n">get_confirmation_status</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">confirmation_id</span><span class="p">)</span>
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">status</span><span class="p">)</span>  <span class="c1"># &quot;pending&quot;</span>
 </code></pre></div>
 <h5 id="tool_call"><code>tool_call</code></h5>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">tool_call</span><span class="p">:</span> <span class="n">ToolCall</span> <span class="o">|</span> <span class="kc">None</span>
 </code></pre></div>
-<p>Information about the tool call that triggered this interrupt (if applicable).</p>
+<p>Information about the tool call that triggered this confirmation (if applicable).</p>
 <p><strong>Attributes:</strong>
 - <code>name</code> (<code>str</code>): Tool name
 - <code>args</code> (<code>dict[str, Any]</code>): Tool arguments
@@ -2151,7 +2220,7 @@
 <p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;Delete my files&quot;</span><span class="p">)</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">tool_call</span><span class="p">:</span>
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">tool_call</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># &quot;delete_file&quot;</span>
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Args: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">tool_call</span><span class="o">.</span><span class="n">args</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># {&quot;path&quot;: &quot;/tmp/test.txt&quot;}</span>
@@ -2167,7 +2236,7 @@
 <p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;What is 2+2?&quot;</span><span class="p">)</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="c1"># Access ReAct-specific state</span>
 <a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s2">&quot;trajectory&quot;</span><span class="p">]</span>
 <a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">trajectory</span><span class="p">)</span>
@@ -2202,7 +2271,7 @@
 - <code>question</code> (<code>str</code>): The question to ask the user</p>
 <p><strong>Usage:</strong></p>
 <p>The agent can call this whenever it needs clarification or more information from the user.</p>
-<p>Raises <code>HumanInTheLoopRequired</code> exception.</p>
+<p>Raises <code>ConfirmationRequired</code> exception.</p>
 <p><strong>Notes:</strong>
 - Can be disabled with <code>enable_ask_to_user=False</code></p>
 <hr />
@@ -2266,21 +2335,21 @@
 - Input fields: All fields before <code>-&gt;</code> (type: <code>str</code>)
 - Output fields: All fields after <code>-&gt;</code> (type: <code>str</code>)</p>
 <hr />
-<h2 id="tool-interruption">Tool Interruption</h2>
-<p>Tools can require user confirmation before execution using the <code>interruptible</code> parameter:</p>
+<h2 id="tool-confirmation">Tool Confirmation</h2>
+<p>Tools can require user confirmation before execution using the <code>require_confirmation</code> parameter:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nd">@tool</span><span class="p">(</span>
 <a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;delete_file&quot;</span><span class="p">,</span>
 <a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Delete a file&quot;</span><span class="p">,</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">interruptible</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Require confirmation before execution</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">require_confirmation</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Require confirmation before execution</span>
 <a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="p">)</span>
 <a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">delete_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 <a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deleted </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
-<p>When the agent tries to call this tool, it raises <code>HumanInTheLoopRequired</code> with a confirmation question on the first call. After the user approves, the tool executes normally.</p>
+<p>When the agent tries to call this tool, it raises <code>ConfirmationRequired</code> with a confirmation question on the first call. After the user approves, the tool executes normally.</p>
 <p><strong>Confirmation Message Format:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>&quot;Confirm execution of {tool_name} with args: {args}? (yes/no)&quot;
 </code></pre></div>
@@ -2291,7 +2360,7 @@
 <p><strong>Example:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">try</span><span class="p">:</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="s2">&quot;Delete all temporary files&quot;</span><span class="p">)</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">except</span> <span class="n">HumanInTheLoopRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">except</span> <span class="n">ConfirmationRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">question</span><span class="p">)</span>  <span class="c1"># &quot;Confirm execution of delete_file...&quot;</span>
 <a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>    <span class="c1"># User approves</span>
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">resume</span><span class="p">(</span><span class="s2">&quot;yes&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
@@ -2322,7 +2391,7 @@
 <hr />
 <h2 id="type-annotations">Type Annotations</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReAct</span><span class="p">,</span> <span class="n">Signature</span><span class="p">,</span> <span class="n">Tool</span><span class="p">,</span> <span class="n">Prediction</span><span class="p">,</span> <span class="n">HumanInTheLoopRequired</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">udspy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReAct</span><span class="p">,</span> <span class="n">Signature</span><span class="p">,</span> <span class="n">Tool</span><span class="p">,</span> <span class="n">Prediction</span><span class="p">,</span> <span class="n">ConfirmationRequired</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="c1"># Constructor types</span>
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="n">signature</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Signature</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span>
@@ -2335,18 +2404,18 @@
 <a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">aforward</span><span class="p">(</span><span class="o">**</span><span class="n">input_args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Prediction</span><span class="p">:</span> <span class="o">...</span>
 <a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">resume</span><span class="p">(</span>
 <a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>    <span class="n">user_response</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>    <span class="n">saved_state</span><span class="p">:</span> <span class="n">HumanInTheLoopRequired</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>    <span class="n">saved_state</span><span class="p">:</span> <span class="n">ConfirmationRequired</span>
 <a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Prediction</span><span class="p">:</span> <span class="o">...</span>
 <a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">aresume</span><span class="p">(</span>
 <a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a>    <span class="n">user_response</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a>    <span class="n">saved_state</span><span class="p">:</span> <span class="n">HumanInTheLoopRequired</span>
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a>    <span class="n">saved_state</span><span class="p">:</span> <span class="n">ConfirmationRequired</span>
 <a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Prediction</span><span class="p">:</span> <span class="o">...</span>
 </code></pre></div>
 <hr />
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="../../examples/react/">ReAct Examples</a> - Usage guide and examples</li>
-<li><a href="../interrupt/">Interrupt API</a> - Interrupt system and <code>HumanInTheLoopRequired</code> documentation</li>
+<li><a href="../confirmation/">Confirmation API</a> - Confirmation system and <code>ConfirmationRequired</code> documentation</li>
 <li><a href="../tool/">Tool API</a> - Creating and configuring tools</li>
 <li><a href="../module/">Module API</a> - Base module documentation</li>
 <li><a href="../signature/">Signature API</a> - Signature documentation</li>
