@@ -2051,8 +2051,7 @@ along with an optional instruction describing the task.</p>
 <span class="normal"><a href="#__codelineno-0-202">202</a></span>
 <span class="normal"><a href="#__codelineno-0-203">203</a></span>
 <span class="normal"><a href="#__codelineno-0-204">204</a></span>
-<span class="normal"><a href="#__codelineno-0-205">205</a></span>
-<span class="normal"><a href="#__codelineno-0-206">206</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-96" name="__codelineno-0-96"></a><span class="k">class</span><span class="w"> </span><span class="nc">Signature</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">SignatureMeta</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-205">205</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-96" name="__codelineno-0-96"></a><span class="k">class</span><span class="w"> </span><span class="nc">Signature</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">,</span> <span class="n">metaclass</span><span class="o">=</span><span class="n">SignatureMeta</span><span class="p">):</span>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for defining LLM task signatures.</span>
 <a id="__codelineno-0-98" name="__codelineno-0-98"></a>
 <a id="__codelineno-0-99" name="__codelineno-0-99"></a><span class="sd">    A Signature specifies the input and output fields for an LLM task,</span>
@@ -2142,27 +2141,26 @@ along with an optional instruction describing the task.</p>
 <a id="__codelineno-0-183" name="__codelineno-0-183"></a>        <span class="n">parts</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-184" name="__codelineno-0-184"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
 <a id="__codelineno-0-185" name="__codelineno-0-185"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<a id="__codelineno-0-186" name="__codelineno-0-186"></a>                <span class="sa">f</span><span class="s2">&quot;Invalid signature format: &#39;</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
-<a id="__codelineno-0-187" name="__codelineno-0-187"></a>                <span class="s2">&quot;Must have exactly one &#39;-&gt;&#39; separator&quot;</span>
-<a id="__codelineno-0-188" name="__codelineno-0-188"></a>            <span class="p">)</span>
-<a id="__codelineno-0-189" name="__codelineno-0-189"></a>
-<a id="__codelineno-0-190" name="__codelineno-0-190"></a>        <span class="c1"># Parse inputs (comma-separated, trimmed)</span>
-<a id="__codelineno-0-191" name="__codelineno-0-191"></a>        <span class="n">input_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<a id="__codelineno-0-192" name="__codelineno-0-192"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">input_str</span><span class="p">:</span>
-<a id="__codelineno-0-193" name="__codelineno-0-193"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one input field&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-194" name="__codelineno-0-194"></a>
-<a id="__codelineno-0-195" name="__codelineno-0-195"></a>        <span class="n">input_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
-<a id="__codelineno-0-196" name="__codelineno-0-196"></a>        <span class="n">input_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
-<a id="__codelineno-0-197" name="__codelineno-0-197"></a>
-<a id="__codelineno-0-198" name="__codelineno-0-198"></a>        <span class="c1"># Parse outputs (comma-separated, trimmed)</span>
-<a id="__codelineno-0-199" name="__codelineno-0-199"></a>        <span class="n">output_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<a id="__codelineno-0-200" name="__codelineno-0-200"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">output_str</span><span class="p">:</span>
-<a id="__codelineno-0-201" name="__codelineno-0-201"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one output field&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-202" name="__codelineno-0-202"></a>
-<a id="__codelineno-0-203" name="__codelineno-0-203"></a>        <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
-<a id="__codelineno-0-204" name="__codelineno-0-204"></a>        <span class="n">output_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
-<a id="__codelineno-0-205" name="__codelineno-0-205"></a>
-<a id="__codelineno-0-206" name="__codelineno-0-206"></a>        <span class="k">return</span> <span class="n">make_signature</span><span class="p">(</span><span class="n">input_fields</span><span class="p">,</span> <span class="n">output_fields</span><span class="p">,</span> <span class="n">instructions</span><span class="p">)</span>
+<a id="__codelineno-0-186" name="__codelineno-0-186"></a>                <span class="sa">f</span><span class="s2">&quot;Invalid signature format: &#39;</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2">&#39;. Must have exactly one &#39;-&gt;&#39; separator&quot;</span>
+<a id="__codelineno-0-187" name="__codelineno-0-187"></a>            <span class="p">)</span>
+<a id="__codelineno-0-188" name="__codelineno-0-188"></a>
+<a id="__codelineno-0-189" name="__codelineno-0-189"></a>        <span class="c1"># Parse inputs (comma-separated, trimmed)</span>
+<a id="__codelineno-0-190" name="__codelineno-0-190"></a>        <span class="n">input_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-191" name="__codelineno-0-191"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">input_str</span><span class="p">:</span>
+<a id="__codelineno-0-192" name="__codelineno-0-192"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one input field&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-193" name="__codelineno-0-193"></a>
+<a id="__codelineno-0-194" name="__codelineno-0-194"></a>        <span class="n">input_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+<a id="__codelineno-0-195" name="__codelineno-0-195"></a>        <span class="n">input_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
+<a id="__codelineno-0-196" name="__codelineno-0-196"></a>
+<a id="__codelineno-0-197" name="__codelineno-0-197"></a>        <span class="c1"># Parse outputs (comma-separated, trimmed)</span>
+<a id="__codelineno-0-198" name="__codelineno-0-198"></a>        <span class="n">output_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-199" name="__codelineno-0-199"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">output_str</span><span class="p">:</span>
+<a id="__codelineno-0-200" name="__codelineno-0-200"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one output field&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-201" name="__codelineno-0-201"></a>
+<a id="__codelineno-0-202" name="__codelineno-0-202"></a>        <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+<a id="__codelineno-0-203" name="__codelineno-0-203"></a>        <span class="n">output_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
+<a id="__codelineno-0-204" name="__codelineno-0-204"></a>
+<a id="__codelineno-0-205" name="__codelineno-0-205"></a>        <span class="k">return</span> <span class="n">make_signature</span><span class="p">(</span><span class="n">input_fields</span><span class="p">,</span> <span class="n">output_fields</span><span class="p">,</span> <span class="n">instructions</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -2392,8 +2390,7 @@ class-based approach with InputField() and OutputField().</p>
 <span class="normal"><a href="#__codelineno-0-202">202</a></span>
 <span class="normal"><a href="#__codelineno-0-203">203</a></span>
 <span class="normal"><a href="#__codelineno-0-204">204</a></span>
-<span class="normal"><a href="#__codelineno-0-205">205</a></span>
-<span class="normal"><a href="#__codelineno-0-206">206</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-134" name="__codelineno-0-134"></a><span class="nd">@classmethod</span>
+<span class="normal"><a href="#__codelineno-0-205">205</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-134" name="__codelineno-0-134"></a><span class="nd">@classmethod</span>
 <a id="__codelineno-0-135" name="__codelineno-0-135"></a><span class="k">def</span><span class="w"> </span><span class="nf">from_string</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">instructions</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="s2">&quot;Signature&quot;</span><span class="p">]:</span>
 <a id="__codelineno-0-136" name="__codelineno-0-136"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Signature from DSPy-style string format.</span>
 <a id="__codelineno-0-137" name="__codelineno-0-137"></a>
@@ -2445,27 +2442,26 @@ class-based approach with InputField() and OutputField().</p>
 <a id="__codelineno-0-183" name="__codelineno-0-183"></a>    <span class="n">parts</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-184" name="__codelineno-0-184"></a>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
 <a id="__codelineno-0-185" name="__codelineno-0-185"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<a id="__codelineno-0-186" name="__codelineno-0-186"></a>            <span class="sa">f</span><span class="s2">&quot;Invalid signature format: &#39;</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2">&#39;. &quot;</span>
-<a id="__codelineno-0-187" name="__codelineno-0-187"></a>            <span class="s2">&quot;Must have exactly one &#39;-&gt;&#39; separator&quot;</span>
-<a id="__codelineno-0-188" name="__codelineno-0-188"></a>        <span class="p">)</span>
-<a id="__codelineno-0-189" name="__codelineno-0-189"></a>
-<a id="__codelineno-0-190" name="__codelineno-0-190"></a>    <span class="c1"># Parse inputs (comma-separated, trimmed)</span>
-<a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="n">input_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<a id="__codelineno-0-192" name="__codelineno-0-192"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_str</span><span class="p">:</span>
-<a id="__codelineno-0-193" name="__codelineno-0-193"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one input field&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-194" name="__codelineno-0-194"></a>
-<a id="__codelineno-0-195" name="__codelineno-0-195"></a>    <span class="n">input_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
-<a id="__codelineno-0-196" name="__codelineno-0-196"></a>    <span class="n">input_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
-<a id="__codelineno-0-197" name="__codelineno-0-197"></a>
-<a id="__codelineno-0-198" name="__codelineno-0-198"></a>    <span class="c1"># Parse outputs (comma-separated, trimmed)</span>
-<a id="__codelineno-0-199" name="__codelineno-0-199"></a>    <span class="n">output_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-<a id="__codelineno-0-200" name="__codelineno-0-200"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">output_str</span><span class="p">:</span>
-<a id="__codelineno-0-201" name="__codelineno-0-201"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one output field&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-202" name="__codelineno-0-202"></a>
-<a id="__codelineno-0-203" name="__codelineno-0-203"></a>    <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
-<a id="__codelineno-0-204" name="__codelineno-0-204"></a>    <span class="n">output_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
-<a id="__codelineno-0-205" name="__codelineno-0-205"></a>
-<a id="__codelineno-0-206" name="__codelineno-0-206"></a>    <span class="k">return</span> <span class="n">make_signature</span><span class="p">(</span><span class="n">input_fields</span><span class="p">,</span> <span class="n">output_fields</span><span class="p">,</span> <span class="n">instructions</span><span class="p">)</span>
+<a id="__codelineno-0-186" name="__codelineno-0-186"></a>            <span class="sa">f</span><span class="s2">&quot;Invalid signature format: &#39;</span><span class="si">{</span><span class="n">spec</span><span class="si">}</span><span class="s2">&#39;. Must have exactly one &#39;-&gt;&#39; separator&quot;</span>
+<a id="__codelineno-0-187" name="__codelineno-0-187"></a>        <span class="p">)</span>
+<a id="__codelineno-0-188" name="__codelineno-0-188"></a>
+<a id="__codelineno-0-189" name="__codelineno-0-189"></a>    <span class="c1"># Parse inputs (comma-separated, trimmed)</span>
+<a id="__codelineno-0-190" name="__codelineno-0-190"></a>    <span class="n">input_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">input_str</span><span class="p">:</span>
+<a id="__codelineno-0-192" name="__codelineno-0-192"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one input field&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-193" name="__codelineno-0-193"></a>
+<a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="n">input_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+<a id="__codelineno-0-195" name="__codelineno-0-195"></a>    <span class="n">input_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">input_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
+<a id="__codelineno-0-196" name="__codelineno-0-196"></a>
+<a id="__codelineno-0-197" name="__codelineno-0-197"></a>    <span class="c1"># Parse outputs (comma-separated, trimmed)</span>
+<a id="__codelineno-0-198" name="__codelineno-0-198"></a>    <span class="n">output_str</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<a id="__codelineno-0-199" name="__codelineno-0-199"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">output_str</span><span class="p">:</span>
+<a id="__codelineno-0-200" name="__codelineno-0-200"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Signature must have at least one output field&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-201" name="__codelineno-0-201"></a>
+<a id="__codelineno-0-202" name="__codelineno-0-202"></a>    <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)]</span>
+<a id="__codelineno-0-203" name="__codelineno-0-203"></a>    <span class="n">output_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">output_names</span> <span class="k">if</span> <span class="n">name</span><span class="p">}</span>
+<a id="__codelineno-0-204" name="__codelineno-0-204"></a>
+<a id="__codelineno-0-205" name="__codelineno-0-205"></a>    <span class="k">return</span> <span class="n">make_signature</span><span class="p">(</span><span class="n">input_fields</span><span class="p">,</span> <span class="n">output_fields</span><span class="p">,</span> <span class="n">instructions</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3134,7 +3130,8 @@ class-based approach with InputField() and OutputField().</p>
 
             <details class="quote">
               <summary>Source code in <code>src/udspy/signature.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-209">209</a></span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-208">208</a></span>
+<span class="normal"><a href="#__codelineno-0-209">209</a></span>
 <span class="normal"><a href="#__codelineno-0-210">210</a></span>
 <span class="normal"><a href="#__codelineno-0-211">211</a></span>
 <span class="normal"><a href="#__codelineno-0-212">212</a></span>
@@ -3174,49 +3171,48 @@ class-based approach with InputField() and OutputField().</p>
 <span class="normal"><a href="#__codelineno-0-246">246</a></span>
 <span class="normal"><a href="#__codelineno-0-247">247</a></span>
 <span class="normal"><a href="#__codelineno-0-248">248</a></span>
-<span class="normal"><a href="#__codelineno-0-249">249</a></span>
-<span class="normal"><a href="#__codelineno-0-250">250</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-209" name="__codelineno-0-209"></a><span class="k">def</span><span class="w"> </span><span class="nf">make_signature</span><span class="p">(</span>
-<a id="__codelineno-0-210" name="__codelineno-0-210"></a>    <span class="n">input_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">],</span>
-<a id="__codelineno-0-211" name="__codelineno-0-211"></a>    <span class="n">output_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">],</span>
-<a id="__codelineno-0-212" name="__codelineno-0-212"></a>    <span class="n">instructions</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-213" name="__codelineno-0-213"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">Signature</span><span class="p">]:</span>
-<a id="__codelineno-0-214" name="__codelineno-0-214"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dynamically create a Signature class.</span>
-<a id="__codelineno-0-215" name="__codelineno-0-215"></a>
-<a id="__codelineno-0-216" name="__codelineno-0-216"></a><span class="sd">    Args:</span>
-<a id="__codelineno-0-217" name="__codelineno-0-217"></a><span class="sd">        input_fields: Dictionary mapping field names to types for inputs</span>
-<a id="__codelineno-0-218" name="__codelineno-0-218"></a><span class="sd">        output_fields: Dictionary mapping field names to types for outputs</span>
-<a id="__codelineno-0-219" name="__codelineno-0-219"></a><span class="sd">        instructions: Task instructions</span>
-<a id="__codelineno-0-220" name="__codelineno-0-220"></a>
-<a id="__codelineno-0-221" name="__codelineno-0-221"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-0-222" name="__codelineno-0-222"></a><span class="sd">        A new Signature class</span>
-<a id="__codelineno-0-223" name="__codelineno-0-223"></a>
-<a id="__codelineno-0-224" name="__codelineno-0-224"></a><span class="sd">    Example:</span>
-<a id="__codelineno-0-225" name="__codelineno-0-225"></a><span class="sd">        ```python</span>
-<a id="__codelineno-0-226" name="__codelineno-0-226"></a><span class="sd">        QA = make_signature(</span>
-<a id="__codelineno-0-227" name="__codelineno-0-227"></a><span class="sd">            {&quot;question&quot;: str},</span>
-<a id="__codelineno-0-228" name="__codelineno-0-228"></a><span class="sd">            {&quot;answer&quot;: str},</span>
-<a id="__codelineno-0-229" name="__codelineno-0-229"></a><span class="sd">            &quot;Answer questions concisely&quot;</span>
-<a id="__codelineno-0-230" name="__codelineno-0-230"></a><span class="sd">        )</span>
-<a id="__codelineno-0-231" name="__codelineno-0-231"></a><span class="sd">        ```</span>
-<a id="__codelineno-0-232" name="__codelineno-0-232"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-233" name="__codelineno-0-233"></a>    <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
-<a id="__codelineno-0-234" name="__codelineno-0-234"></a>
-<a id="__codelineno-0-235" name="__codelineno-0-235"></a>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">input_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<a id="__codelineno-0-236" name="__codelineno-0-236"></a>        <span class="n">fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">InputField</span><span class="p">())</span>
-<a id="__codelineno-0-237" name="__codelineno-0-237"></a>
-<a id="__codelineno-0-238" name="__codelineno-0-238"></a>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">output_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<a id="__codelineno-0-239" name="__codelineno-0-239"></a>        <span class="n">fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">OutputField</span><span class="p">())</span>
-<a id="__codelineno-0-240" name="__codelineno-0-240"></a>
-<a id="__codelineno-0-241" name="__codelineno-0-241"></a>    <span class="n">sig</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span>
-<a id="__codelineno-0-242" name="__codelineno-0-242"></a>        <span class="s2">&quot;DynamicSignature&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-243" name="__codelineno-0-243"></a>        <span class="n">__base__</span><span class="o">=</span><span class="n">Signature</span><span class="p">,</span>
-<a id="__codelineno-0-244" name="__codelineno-0-244"></a>        <span class="o">**</span><span class="n">fields</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-<a id="__codelineno-0-245" name="__codelineno-0-245"></a>    <span class="p">)</span>
-<a id="__codelineno-0-246" name="__codelineno-0-246"></a>
-<a id="__codelineno-0-247" name="__codelineno-0-247"></a>    <span class="k">if</span> <span class="n">instructions</span><span class="p">:</span>
-<a id="__codelineno-0-248" name="__codelineno-0-248"></a>        <span class="n">sig</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">instructions</span>
-<a id="__codelineno-0-249" name="__codelineno-0-249"></a>
-<a id="__codelineno-0-250" name="__codelineno-0-250"></a>    <span class="k">return</span> <span class="n">sig</span>
+<span class="normal"><a href="#__codelineno-0-249">249</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-208" name="__codelineno-0-208"></a><span class="k">def</span><span class="w"> </span><span class="nf">make_signature</span><span class="p">(</span>
+<a id="__codelineno-0-209" name="__codelineno-0-209"></a>    <span class="n">input_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">],</span>
+<a id="__codelineno-0-210" name="__codelineno-0-210"></a>    <span class="n">output_fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">],</span>
+<a id="__codelineno-0-211" name="__codelineno-0-211"></a>    <span class="n">instructions</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-212" name="__codelineno-0-212"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">Signature</span><span class="p">]:</span>
+<a id="__codelineno-0-213" name="__codelineno-0-213"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dynamically create a Signature class.</span>
+<a id="__codelineno-0-214" name="__codelineno-0-214"></a>
+<a id="__codelineno-0-215" name="__codelineno-0-215"></a><span class="sd">    Args:</span>
+<a id="__codelineno-0-216" name="__codelineno-0-216"></a><span class="sd">        input_fields: Dictionary mapping field names to types for inputs</span>
+<a id="__codelineno-0-217" name="__codelineno-0-217"></a><span class="sd">        output_fields: Dictionary mapping field names to types for outputs</span>
+<a id="__codelineno-0-218" name="__codelineno-0-218"></a><span class="sd">        instructions: Task instructions</span>
+<a id="__codelineno-0-219" name="__codelineno-0-219"></a>
+<a id="__codelineno-0-220" name="__codelineno-0-220"></a><span class="sd">    Returns:</span>
+<a id="__codelineno-0-221" name="__codelineno-0-221"></a><span class="sd">        A new Signature class</span>
+<a id="__codelineno-0-222" name="__codelineno-0-222"></a>
+<a id="__codelineno-0-223" name="__codelineno-0-223"></a><span class="sd">    Example:</span>
+<a id="__codelineno-0-224" name="__codelineno-0-224"></a><span class="sd">        ```python</span>
+<a id="__codelineno-0-225" name="__codelineno-0-225"></a><span class="sd">        QA = make_signature(</span>
+<a id="__codelineno-0-226" name="__codelineno-0-226"></a><span class="sd">            {&quot;question&quot;: str},</span>
+<a id="__codelineno-0-227" name="__codelineno-0-227"></a><span class="sd">            {&quot;answer&quot;: str},</span>
+<a id="__codelineno-0-228" name="__codelineno-0-228"></a><span class="sd">            &quot;Answer questions concisely&quot;</span>
+<a id="__codelineno-0-229" name="__codelineno-0-229"></a><span class="sd">        )</span>
+<a id="__codelineno-0-230" name="__codelineno-0-230"></a><span class="sd">        ```</span>
+<a id="__codelineno-0-231" name="__codelineno-0-231"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-232" name="__codelineno-0-232"></a>    <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-0-233" name="__codelineno-0-233"></a>
+<a id="__codelineno-0-234" name="__codelineno-0-234"></a>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">input_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-0-235" name="__codelineno-0-235"></a>        <span class="n">fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">InputField</span><span class="p">())</span>
+<a id="__codelineno-0-236" name="__codelineno-0-236"></a>
+<a id="__codelineno-0-237" name="__codelineno-0-237"></a>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">output_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-0-238" name="__codelineno-0-238"></a>        <span class="n">fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">OutputField</span><span class="p">())</span>
+<a id="__codelineno-0-239" name="__codelineno-0-239"></a>
+<a id="__codelineno-0-240" name="__codelineno-0-240"></a>    <span class="n">sig</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span>
+<a id="__codelineno-0-241" name="__codelineno-0-241"></a>        <span class="s2">&quot;DynamicSignature&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-242" name="__codelineno-0-242"></a>        <span class="n">__base__</span><span class="o">=</span><span class="n">Signature</span><span class="p">,</span>
+<a id="__codelineno-0-243" name="__codelineno-0-243"></a>        <span class="o">**</span><span class="n">fields</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+<a id="__codelineno-0-244" name="__codelineno-0-244"></a>    <span class="p">)</span>
+<a id="__codelineno-0-245" name="__codelineno-0-245"></a>
+<a id="__codelineno-0-246" name="__codelineno-0-246"></a>    <span class="k">if</span> <span class="n">instructions</span><span class="p">:</span>
+<a id="__codelineno-0-247" name="__codelineno-0-247"></a>        <span class="n">sig</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">instructions</span>
+<a id="__codelineno-0-248" name="__codelineno-0-248"></a>
+<a id="__codelineno-0-249" name="__codelineno-0-249"></a>    <span class="k">return</span> <span class="n">sig</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
