@@ -6,6 +6,8 @@ from typing import Any, get_args, get_origin
 
 from pydantic.fields import FieldInfo
 
+from udspy.callback import with_callbacks
+
 
 class Tool:
     """Wrapper for a tool function with metadata.
@@ -37,6 +39,7 @@ class Tool:
         require_confirmation: bool = False,
         desc: str | None = None,  # Alias for description (DSPy compatibility)
         args: dict[str, str] | None = None,  # Optional manual arg spec (DSPy compatibility)
+        callbacks: list[Any] | None = None,
     ):
         """Initialize a Tool.
 
@@ -47,9 +50,11 @@ class Tool:
             require_confirmation: If True, wraps function with @confirm_first decorator
             desc: Alias for description (for DSPy compatibility)
             args: Optional manual argument specification (for DSPy compatibility)
+            callbacks: Optional list of callback handlers for this tool instance
         """
         self.name = name or func.__name__
         self.func = func
+        self.callbacks = callbacks or []
 
         # Wrap with @confirm_first decorator if requested
         if require_confirmation:
@@ -118,10 +123,12 @@ class Tool:
                 desc_str = param_info["description"] or "No description"
                 self.args[param_name] = f"{type_str} - {desc_str}"
 
+    @with_callbacks
     def __call__(self, *args: Any, **kwargs: Any) -> Any:
         """Call the wrapped function."""
         return self.func(*args, **kwargs)
 
+    @with_callbacks
     async def acall(self, **kwargs: Any) -> Any:
         """Async call the wrapped function.
 

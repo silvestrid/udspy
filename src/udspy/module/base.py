@@ -4,6 +4,7 @@ import asyncio
 from collections.abc import AsyncGenerator
 from typing import Any
 
+from udspy.callback import with_callbacks
 from udspy.confirmation import ConfirmationRequired
 from udspy.streaming import Prediction, StreamEvent
 from udspy.utils import ensure_sync_context
@@ -36,6 +37,15 @@ class Module:
         ```
     """
 
+    def __init__(self, *, callbacks: list[Any] | None = None):
+        """Initialize module.
+
+        Args:
+            callbacks: Optional list of callback handlers for this module instance
+        """
+        self.callbacks = callbacks or []
+
+    @with_callbacks
     async def aexecute(self, *, stream: bool = False, **inputs: Any) -> Prediction:
         """Core execution method. Must be implemented by subclasses.
 

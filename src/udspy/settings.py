@@ -20,6 +20,7 @@ class Settings:
         self._aclient: AsyncOpenAI | None = None
         self._default_model: str | None = None
         self._default_kwargs: dict[str, Any] = {}
+        self._callbacks: list[Any] = []
 
         # Context-specific overrides (thread-safe)
         self._context_aclient: ContextVar[AsyncOpenAI | None] = ContextVar(
@@ -29,6 +30,9 @@ class Settings:
         self._context_kwargs: ContextVar[dict[str, Any] | None] = ContextVar(
             "context_kwargs", default=None
         )
+        self._context_callbacks: ContextVar[list[Any] | None] = ContextVar(
+            "context_callbacks", default=None
+        )
 
     def configure(
         self,
@@ -36,6 +40,7 @@ class Settings:
         base_url: str | None = None,
         model: str | None = None,
         aclient: AsyncOpenAI | None = None,
+        callbacks: list[Any] | None = None,
         **kwargs: Any,
     ) -> None:
         """Configure global OpenAI client and defaults.
@@ -45,14 +50,24 @@ class Settings:
             base_url: Base URL for OpenAI API
             model: Default model to use for all predictions
             aclient: Custom async OpenAI client
+            callbacks: List of callback handlers for telemetry/monitoring
             **kwargs: Default kwargs for all chat completions (temperature, etc.)
 
         Example:
             ```python
             import udspy
+            from udspy import BaseCallback
 
-            # With API key
-            udspy.settings.configure(api_key="sk-...", model="gpt-4o")
+            class LoggingCallback(BaseCallback):
+                def on_lm_start(self, call_id, instance, inputs):
+                    print(f"LLM called with: {inputs}")
+
+            # With API key and callbacks
+            udspy.settings.configure(
+                api_key="sk-...",
+                model="gpt-4o",
+                callbacks=[LoggingCallback()]
+            )
 
             # With custom client
             from openai import AsyncOpenAI
@@ -67,6 +82,9 @@ class Settings:
 
         if model:
             self._default_model = model
+
+        if callbacks is not None:
+            self._callbacks = callbacks
 
         self._default_kwargs.update(kwargs)
 
@@ -117,6 +135,24 @@ class Settings:
 
         return result
 
+    def get(self, key: str, default: Any = None) -> Any:
+        """Get a setting value by key (for callback compatibility).
+
+        Args:
+            key: Setting key to retrieve
+            default: Default value if key not found
+
+        Returns:
+            Setting value or default
+        """
+        if key == "callbacks":
+            # Check context first
+            context_callbacks = self._context_callbacks.get()
+            if context_callbacks is not None:
+                return context_callbacks
+            return self._callbacks
+        return default
+
     @contextmanager
     def context(
         self,
@@ -124,6 +160,7 @@ class Settings:
         base_url: str | None = None,
         model: str | None = None,
         aclient: AsyncOpenAI | None = None,
+        callbacks: list[Any] | None = None,
         **kwargs: Any,
     ) -> Iterator[None]:
         """Context manager for temporary settings overrides.
@@ -136,6 +173,7 @@ class Settings:
             api_key: Temporary OpenAI API key (creates temporary client)
             model: Temporary model to use
             aclient: Temporary async OpenAI client
+            callbacks: Temporary callback handlers
             **kwargs: Temporary kwargs for chat completions
 
         Example:
@@ -164,16 +202,20 @@ class Settings:
         prev_aclient = self._context_aclient.get()
         prev_model = self._context_model.get()
         prev_kwargs = self._context_kwargs.get()
+        prev_callbacks = self._context_callbacks.get()
 
         try:
             # Set context-specific values
             if aclient:
                 self._context_aclient.set(aclient)
-            else:
+            elif api_key or base_url:
                 self._context_aclient.set(AsyncOpenAI(api_key=api_key, base_url=base_url))
 
             if model:
                 self._context_model.set(model)
+
+            if callbacks is not None:
+                self._context_callbacks.set(callbacks)
 
             if kwargs:
                 # Merge with previous context kwargs if any
@@ -188,6 +230,7 @@ class Settings:
             self._context_aclient.set(prev_aclient)
             self._context_model.set(prev_model)
             self._context_kwargs.set(prev_kwargs)
+            self._context_callbacks.set(prev_callbacks)
 
 
 # Global settings instance

@@ -94,3 +94,50 @@ def test_context_with_custom_client() -> None:
 
     # Back to global clients
     assert settings.aclient != custom_aclient
+
+
+def test_context_preserves_client_when_only_changing_other_settings() -> None:
+    """Test that client is preserved when context only changes model/callbacks/kwargs."""
+    settings.configure(api_key="sk-global", model="gpt-4o-mini")
+    original_client = settings.aclient
+
+    # Test 1: Only changing model should keep the same client
+    with settings.context(model="gpt-4"):
+        assert settings.aclient is original_client
+        assert settings.default_model == "gpt-4"
+
+    # Test 2: Only changing callbacks should keep the same client
+    from udspy import BaseCallback
+
+    class TestCallback(BaseCallback):
+        pass
+
+    with settings.context(callbacks=[TestCallback()]):
+        assert settings.aclient is original_client
+
+    # Test 3: Only changing kwargs should keep the same client
+    with settings.context(temperature=0.9, max_tokens=100):
+        assert settings.aclient is original_client
+        assert settings.default_kwargs["temperature"] == 0.9
+
+    # Test 4: Changing multiple non-client settings should keep the same client
+    with settings.context(model="gpt-4-turbo", temperature=0.5, callbacks=[TestCallback()]):
+        assert settings.aclient is original_client
+        assert settings.default_model == "gpt-4-turbo"
+
+    # Test 5: Providing api_key SHOULD create a new client
+    with settings.context(api_key="sk-context"):
+        assert settings.aclient is not original_client
+
+    # Test 6: Providing base_url SHOULD create a new client
+    with settings.context(base_url="http://localhost:8000"):
+        assert settings.aclient is not original_client
+
+    # Test 7: Providing aclient SHOULD use the provided client
+    custom_client = AsyncOpenAI(api_key="sk-custom")
+    with settings.context(aclient=custom_client):
+        assert settings.aclient is custom_client
+        assert settings.aclient is not original_client
+
+    # After all contexts, should be back to original client
+    assert settings.aclient is original_client

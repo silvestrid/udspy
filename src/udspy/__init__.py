@@ -1,6 +1,7 @@
 """udspy: A minimal DSPy-inspired library with native OpenAI tool calling."""
 
 from udspy.adapter import ChatAdapter
+from udspy.callback import ACTIVE_CALL_ID, BaseCallback, with_callbacks
 from udspy.confirmation import (
     ConfirmationRejected,
     ConfirmationRequired,
@@ -39,6 +40,10 @@ __all__ = [
     "Prediction",
     "ChainOfThought",
     "ReAct",
+    # Callbacks
+    "BaseCallback",
+    "with_callbacks",
+    "ACTIVE_CALL_ID",
     # Confirmation
     "ConfirmationRequired",
     "ConfirmationRejected",

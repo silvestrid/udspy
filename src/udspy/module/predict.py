@@ -1,6 +1,7 @@
 """Predict module for LLM predictions based on signatures."""
 
 import asyncio
+import logging
 from collections.abc import AsyncGenerator
 from typing import TYPE_CHECKING, Any, Optional
 
@@ -9,6 +10,7 @@ from openai import AsyncStream
 from openai.types.chat import ChatCompletionChunk
 
 from udspy.adapter import ChatAdapter
+from udspy.callback import with_callbacks
 from udspy.module.base import Module
 from udspy.settings import settings
 from udspy.signature import Signature
@@ -17,6 +19,8 @@ from udspy.streaming import Prediction, StreamChunk, StreamEvent
 if TYPE_CHECKING:
     from udspy.history import History
     from udspy.tool import Tool
+
+logger = logging.getLogger(__name__)
 
 
 class Predict(Module):
@@ -59,6 +63,7 @@ class Predict(Module):
         tools: list["Tool"] | None = None,
         max_turns: int = 10,
         adapter: ChatAdapter | None = None,
+        callbacks: list[Any] | None = None,
         **kwargs: Any,
     ):
         """Initialize a Predict module.
@@ -70,8 +75,10 @@ class Predict(Module):
             tools: List of tool functions (decorated with @tool) or Pydantic models
             max_turns: Maximum number of LLM calls for tool execution loop (default: 10)
             adapter: Custom adapter (defaults to ChatAdapter)
+            callbacks: Optional list of callback handlers for this module instance
             **kwargs: Additional arguments for chat completion (temperature, etc.)
         """
+        super().__init__(callbacks=callbacks)
         from udspy.tool import Tool
 
         # Convert string signature to Signature class
@@ -91,6 +98,7 @@ class Predict(Module):
             self.tool_callables[tool.name] = tool
             self.tool_schemas.append(tool)
 
+    @with_callbacks
     async def aexecute(
         self,
         *,
@@ -473,6 +481,44 @@ class Predict(Module):
 
         return acc_delta, current_field
 
+    def _execute_lm_callbacks(
+        self,
+        stage: str,
+        call_id: str,
+        inputs: dict | None = None,
+        outputs: dict | None = None,
+        exception: Exception | None = None,
+    ) -> None:
+        """Execute LM callbacks for start/end events.
+
+        Args:
+            stage: "start" or "end"
+            call_id: Unique call identifier
+            inputs: Input parameters for LM call (for start)
+            outputs: Output from LM call (for end)
+            exception: Exception if LM call failed (for end)
+        """
+        from udspy.callback import BaseCallback
+
+        # Get combined global and instance-level callbacks
+        global_callbacks = settings.get("callbacks", [])
+        instance_callbacks = getattr(self, "callbacks", [])
+        callbacks = global_callbacks + instance_callbacks
+
+        for callback in callbacks:
+            if not isinstance(callback, BaseCallback):
+                continue
+
+            try:
+                if stage == "start" and inputs is not None:
+                    callback.on_lm_start(call_id=call_id, instance=self, inputs=inputs)
+                elif stage == "end":
+                    callback.on_lm_end(call_id=call_id, outputs=outputs, exception=exception)
+            except Exception as e:
+                logger.warning(
+                    f"Error in callback {callback.__class__.__name__}.on_lm_{stage}: {e}"
+                )
+
     async def _process_nonstreaming(
         self, completion_kwargs: dict[str, Any], should_emit: bool
     ) -> Prediction:
@@ -485,16 +531,36 @@ class Predict(Module):
         Returns:
             Prediction object
         """
+        import uuid
+
         from udspy.streaming import _stream_queue
 
+        # Start LM callbacks
+        call_id = uuid.uuid4().hex
+        self._execute_lm_callbacks("start", call_id, inputs=completion_kwargs)
+
         client = settings.aclient
-        response = await client.chat.completions.create(**completion_kwargs)
+        outputs_dict = None
+        exception = None
 
-        message = response.choices[0].message
-        completion_text = message.content or ""
-        tool_calls_data = message.tool_calls
+        try:
+            response = await client.chat.completions.create(**completion_kwargs)
+            outputs_dict = {
+                "response": (
+                    response.model_dump() if hasattr(response, "model_dump") else str(response)
+                )
+            }
 
-        outputs = self.adapter.parse_outputs(self.signature, completion_text)
+            message = response.choices[0].message
+            completion_text = message.content or ""
+            tool_calls_data = message.tool_calls
+
+            outputs = self.adapter.parse_outputs(self.signature, completion_text)
+        except Exception as e:
+            exception = e
+            raise
+        finally:
+            self._execute_lm_callbacks("end", call_id, outputs=outputs_dict, exception=exception)
 
         if tool_calls_data:
             outputs["tool_calls"] = [
@@ -588,6 +654,15 @@ class Predict(Module):
         Returns:
             Final Prediction object
         """
+        import uuid
+
+        # Start LM callbacks
+        call_id = uuid.uuid4().hex
+        self._execute_lm_callbacks("start", call_id, inputs=completion_kwargs)
+
+        outputs_dict = None
+        exception = None
+
         try:
             client = settings.aclient
             stream: AsyncStream[ChatCompletionChunk] = await client.chat.completions.create(
@@ -643,11 +718,18 @@ class Predict(Module):
             prediction = Prediction(**outputs)
             if emit_prediction:
                 await queue.put(prediction)
+
+            outputs_dict = {
+                "prediction": prediction.model_dump()
+                if hasattr(prediction, "model_dump")
+                else str(prediction)
+            }
             return prediction
 
         except Exception as e:
             import traceback
 
+            exception = e
             error_event = type(
                 "StreamError",
                 (StreamEvent,),
@@ -656,5 +738,7 @@ class Predict(Module):
             await queue.put(error_event)
             raise
         finally:
+            # End LM callbacks
+            self._execute_lm_callbacks("end", call_id, outputs=outputs_dict, exception=exception)
             if emit_sentinel:
                 await queue.put(None)

@@ -8,6 +8,7 @@ import logging
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Any
 
+from udspy.callback import with_callbacks
 from udspy.confirmation import ConfirmationRequired, respond_to_confirmation
 from udspy.module.base import Module
 from udspy.module.chain_of_thought import ChainOfThought
@@ -91,6 +92,7 @@ class ReAct(Module):
         *,
         max_iters: int = 10,
         enable_ask_to_user: bool = True,
+        callbacks: list[Any] | None = None,
     ):
         """Initialize ReAct module.
 
@@ -99,10 +101,11 @@ class ReAct(Module):
             tools: List of tool functions (decorated with @tool) or Tool objects
             max_iters: Maximum number of reasoning iterations (default: 10)
             enable_ask_to_user: Whether to enable ask_to_user tool (default: True)
+            callbacks: Optional list of callback handlers for this module instance
         """
         from udspy.tool import Tool
 
-        super().__init__()
+        super().__init__(callbacks=callbacks)
 
         # Convert string signature to Signature class
         if isinstance(signature, str):
@@ -189,8 +192,10 @@ class ReAct(Module):
             base_instructions or "Extract the final answer from the trajectory",
         )
 
-        self.react_module = Predict(self.react_signature, tools=list(self.tools.values()))
-        self.extract_module = ChainOfThought(self.extract_signature)
+        self.react_module = Predict(
+            self.react_signature, tools=list(self.tools.values()), callbacks=callbacks
+        )
+        self.extract_module = ChainOfThought(self.extract_signature, callbacks=callbacks)
 
     def _format_trajectory(self, trajectory: dict[str, Any]) -> str:
         """Format trajectory as a string for the LLM.
@@ -333,6 +338,7 @@ class ReAct(Module):
         should_stop = tool_name == "finish"
         return should_stop
 
+    @with_callbacks
     async def aexecute(self, *, stream: bool = False, **input_args: Any) -> Prediction:
         """Execute ReAct loop.
 

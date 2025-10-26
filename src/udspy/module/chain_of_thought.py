@@ -4,6 +4,7 @@ from collections.abc import AsyncGenerator
 from typing import Any
 
 from udspy.adapter import ChatAdapter
+from udspy.callback import with_callbacks
 from udspy.module.base import Module
 from udspy.module.predict import Predict
 from udspy.signature import Signature, make_signature
@@ -41,6 +42,7 @@ class ChainOfThought(Module):
         model: str | None = None,
         tools: list[Tool] | None = None,
         adapter: ChatAdapter | None = None,
+        callbacks: list[Any] | None = None,
         **kwargs: Any,
     ):
         """Initialize a Chain of Thought module.
@@ -52,8 +54,11 @@ class ChainOfThought(Module):
             model: Model name (overrides global default)
             tools: List of Pydantic tool models
             adapter: Custom adapter
+            callbacks: Optional list of callback handlers for this module instance
             **kwargs: Additional arguments for chat completion
         """
+        super().__init__(callbacks=callbacks)
+
         # Convert string signature to Signature class
         if isinstance(signature, str):
             signature = Signature.from_string(signature)
@@ -87,10 +92,12 @@ class ChainOfThought(Module):
             model=model,
             tools=tools,
             adapter=adapter,
+            callbacks=callbacks,
             **kwargs,
         )
 
-    async def aexecute(  # type: ignore[override]
+    @with_callbacks
+    async def aexecute(
         self, *, stream: bool = False, **inputs: Any
     ) -> AsyncGenerator[StreamEvent, None]:
         """Execute chain of thought prediction.
