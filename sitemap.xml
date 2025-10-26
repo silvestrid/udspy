@@ -2,122 +2,126 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://silvestrid.github.io/udspy/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/adapter/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/confirmation/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/history/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/module/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/react/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/settings/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/signature/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/streaming/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/api/tool/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/adapters/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
+    </url>
+    <url>
+         <loc>https://silvestrid.github.io/udspy/architecture/callbacks/</loc>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/confirmation/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/decisions/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/modules/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/overview/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/signatures/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/streaming/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/modules/base/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/modules/chain_of_thought/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/modules/predict/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/architecture/modules/react/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/advanced/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/basic_usage/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/chain_of_thought/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/confirmation/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/context_settings/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/history/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/react/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/streaming/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
     <url>
          <loc>https://silvestrid.github.io/udspy/examples/tool_calling/</loc>
-         <lastmod>2025-10-25</lastmod>
+         <lastmod>2025-10-26</lastmod>
     </url>
 </urlset>
