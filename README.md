@@ -2,9 +2,9 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/udspy.svg)](https://pypi.org/project/udspy/)
 [![Python versions](https://img.shields.io/pypi/pyversions/udspy.svg)](https://pypi.org/project/udspy/)
-[![Tests](https://github.com/silvestrid/udspy/actions/workflows/test.yml/badge.svg)](https://github.com/silvestrid/udspy/actions/workflows/test.yml)
-[![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://silvestrid.github.io/udspy)
-[![codecov](https://codecov.io/gh/silvestrid/udspy/branch/main/graph/badge.svg)](https://codecov.io/gh/silvestrid/udspy)
+[![Tests](https://github.com/baserow/udspy/actions/workflows/test.yml/badge.svg)](https://github.com/baserow/udspy/actions/workflows/test.yml)
+[![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://baserow.github.io/udspy)
+[![codecov](https://codecov.io/gh/baserow/udspy/branch/main/graph/badge.svg)](https://codecov.io/gh/baserow/udspy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A lightweight DSPy-inspired library optimized for resource-constrained environments, with native OpenAI tool calling, human-in-the-loop workflows, and conversation history.
@@ -53,7 +53,7 @@ If resource constraints aren't a concern for your use case, consider [DSPy](http
 
 ```bash
 # Clone the repository
-git clone https://github.com/silvestrid/udspy
+git clone https://github.com/baserow/udspy
 cd udspy
 
 # Install dependencies and package in editable mode
@@ -193,7 +193,7 @@ just docs-serve
 
 ## Documentation
 
-Full documentation is available at [silvestrid.github.io/udspy](https://silvestrid.github.io/udspy)
+Full documentation is available at [baserow.github.io/udspy](https://baserow.github.io/udspy)
 
 Or browse locally:
 - [Architecture](docs/architecture/overview.md)
